@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: xauusd-trading-bot
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    region: frankfurt
+    numInstances: 1
+    disk:
+      name: bot-data
+      mountPath: /app/data
+      sizeGB: 10
+    healthCheckPath: /api/status
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /app/data
+      - key: WEB_DIST_DIR
+        value: /app/frontend/dist
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: EXECUTION_ENGINE
+        value: metaapi
+      - key: TRADING_MODE
+        value: DEMO_ONLY
+      - key: AUTO_TRADING
+        value: "false"
+      - key: RISK_PERCENT
+        value: "1.0"
+      - key: MAX_SPREAD
+        value: "0.80"
+      - key: MAX_DAILY_DRAWDOWN_PCT
+        value: "3.0"
+      - key: EMAIL_TO
+        value: irfan7242@gmail.com
+      - key: WHATSAPP_PROVIDER
+        value: callmebot

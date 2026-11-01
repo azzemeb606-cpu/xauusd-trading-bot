@@ -1,0 +1,23 @@
+{
+  "name": "xau-bot-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "XAUUSD 24/7 Automated Trading, Monitoring & Multi-Channel Alert System",
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:server": "npm run dev --workspace=backend",
+    "dev:web": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
+    "test": "npm test --workspace=backend",
+    "typecheck": "npm run typecheck --workspace=backend",
+    "docker:build": "docker compose build",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}

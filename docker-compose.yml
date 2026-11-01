@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  xau-bot:
+    build: .
+    image: xau-bot:latest
+    container_name: xau-bot
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - bot-data:/app/data
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    # Shm for Chromium
+    shm_size: "256mb"
+    security_opt:
+      - seccomp:unconfined   # required for Playwright sandbox on some kernels
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/status", "-H", "Authorization: Bearer ${ADMIN_TOKEN}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  bot-data:
