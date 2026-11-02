@@ -85,6 +85,8 @@ export default function App() {
 
   const activeGroups = (allTrades.length > 0 ? allTrades.filter((t) => ['PENDING', 'OPEN'].includes(t.status)) : live.trades).filter(filterTrade);
   const closedGroups = allTrades.filter((t) => ['CLOSED', 'CANCELLED', 'FAILED'].includes(t.status)).filter(filterTrade);
+
+  const handleToggleAuto = (val: boolean) => {
     fetch('/api/settings', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
@@ -164,9 +166,6 @@ export default function App() {
       </div>
     );
   }
-
-  const activeGroups = allTrades.length > 0 ? allTrades.filter((t) => ['PENDING', 'OPEN'].includes(t.status)) : live.trades;
-  const closedGroups = allTrades.filter((t) => ['CLOSED', 'CANCELLED', 'FAILED'].includes(t.status));
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
