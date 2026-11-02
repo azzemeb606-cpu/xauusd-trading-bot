@@ -616,7 +616,6 @@ export function SettingsPanel({ settings, token, onUpdate }: Props) {
           </div>
         </form>
       </div>
-      </form>
     </div>
   );
 }

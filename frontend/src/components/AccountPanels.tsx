@@ -159,9 +159,6 @@ export function AccountCard({ acc, token }: { acc: AccountSnapshot; token: strin
     </div>
   );
 }
-    </div>
-  );
-}
 
 function Stat({ label, value, color }: { label: string; value: string; color?: string }) {
   return (
