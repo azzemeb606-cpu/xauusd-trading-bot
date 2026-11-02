@@ -313,7 +313,7 @@ export function SettingsPanel({ settings, token, onUpdate }: Props) {
                 onChange={(e) => handleChange('minFusionConfidence', parseFloat(e.target.value))}
                 style={{ width: '100%', padding: '6px 8px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--text)', fontSize: '0.8rem' }}
               />
-              <div style={{ fontSize: '0.65rem', color: 'var(--text-dim)', marginTop: 2 }}>Gate 2: Default >= 65%</div>
+              <div style={{ fontSize: '0.65rem', color: 'var(--text-dim)', marginTop: 2 }}>Gate 2: Default &gt;= 65%</div>
             </div>
 
             <div className="card-sm">
