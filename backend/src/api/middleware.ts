@@ -33,7 +33,7 @@ export const apiLimiter = rateLimit({
 // ── Async handler wrapper ──────────────────────────────────────────────────
 
 export const asyncHandler =
-  (fn: (req: Request, res: Response, next: NextFunction) => Promise<void>) =>
+  (fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) =>
   (req: Request, res: Response, next: NextFunction): void => {
     fn(req, res, next).catch(next);
   };

@@ -19,11 +19,11 @@ FROM mcr.microsoft.com/playwright:v1.48.2-noble AS runtime
 
 WORKDIR /app/backend
 
-# Copy package and install production dependencies
+# Copy compiled dependencies directly from server-builder
+COPY --from=server-builder /app/backend/node_modules ./node_modules
 COPY backend/package.json ./
-RUN npm install --omit=dev
 
-# Copy compiled backend and frontend from builders
+# Copy compiled backend and frontend artifacts
 COPY --from=server-builder /app/backend/dist ./dist
 COPY --from=web-builder    /app/frontend/dist /app/frontend/dist
 
