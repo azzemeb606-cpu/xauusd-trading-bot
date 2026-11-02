@@ -134,7 +134,10 @@ export function buildRouter(ctx: RouteCtx): Router {
   r.post('/accounts/:key/positions/:posId/close', asyncHandler(async (req, res) => {
     const key = req.params['key'] as 'demo' | 'live';
     const broker = ctx.brokerManager.get(key);
-    if (!broker) return res.status(404).json({ error: 'Broker not found' });
+    if (!broker) {
+      res.status(404).json({ error: 'Broker not found' });
+      return;
+    }
     const r = await broker.closePosition(req.params['posId']!);
     res.json(r);
   }));
@@ -142,10 +145,16 @@ export function buildRouter(ctx: RouteCtx): Router {
   r.post('/accounts/:key/positions/:posId/move-be', asyncHandler(async (req, res) => {
     const key = req.params['key'] as 'demo' | 'live';
     const broker = ctx.brokerManager.get(key);
-    if (!broker) return res.status(404).json({ error: 'Broker not found' });
+    if (!broker) {
+      res.status(404).json({ error: 'Broker not found' });
+      return;
+    }
     const positions = await broker.getPositions();
     const pos = positions.find((p) => p.id === req.params['posId']);
-    if (!pos) return res.status(404).json({ error: 'Position not found' });
+    if (!pos) {
+      res.status(404).json({ error: 'Position not found' });
+      return;
+    }
     const s = ctx.settings.get();
     const beBuffer = s.beBuffer ?? 0.3;
     const newSl = pos.type === 'BUY' ? pos.openPrice + beBuffer : pos.openPrice - beBuffer;
