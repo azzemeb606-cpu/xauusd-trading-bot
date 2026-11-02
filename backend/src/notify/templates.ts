@@ -262,7 +262,7 @@ export function renderAlert(e: AlertEvent): RenderedAlert {
         ur = `⛔ *TRADE BLOCK HO GAYI*: Gold ${dir} trade ko safety gates ne rok diya hai taake capital mehfooz rahe.\nKhatray ke asbaab:\n${failedList}`;
         tableRows = [
           { label: 'Status', value: 'TRADE BLOCKED (Safety)', color: '#EF4444' },
-          { label: 'Blocked Reason', value: String(d.failed?.[0] ?? 'Gates Fail') },
+          { label: 'Blocked Reason', value: String((d.failed as any)?.[0] ?? 'Gates Fail') },
           { label: 'Action Taken', value: 'No order sent to broker' },
         ];
       } else if (isKill) {

@@ -458,7 +458,7 @@ export class Scraper extends EventEmitter {
 
   // ── health loop — emit feed-down / restored events ────────────────────────
 
-  private async parseLoopStarted = false;
+  private parseLoopStarted = false;
   private previouslyHealthy: boolean | null = null;
 
   private async healthLoop(): Promise<void> {

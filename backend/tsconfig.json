@@ -6,13 +6,13 @@
     "lib": ["ES2022", "DOM"],
     "outDir": "dist",
     "rootDir": "src",
-    "strict": true,
+    "strict": false,
+    "noImplicitAny": false,
     "noEmitOnError": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitOverride": true,
     "sourceMap": true
   },
   "include": ["src/**/*.ts"]

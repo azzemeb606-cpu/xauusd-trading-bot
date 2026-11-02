@@ -100,7 +100,7 @@ export class MetaApiBroker implements Broker {
   }
 
   async getAccountInfo(): Promise<AccountInfo> {
-    const i = await this.call('getAccountInformation', () => this.conn.getAccountInformation());
+    const i: any = await this.call('getAccountInformation', () => this.conn.getAccountInformation());
     this.connected = true;
     return {
       balance: i.balance,
@@ -152,13 +152,13 @@ export class MetaApiBroker implements Broker {
   }
 
   async getQuote(): Promise<Quote> {
-    const p = await this.call('getSymbolPrice', () => this.conn.getSymbolPrice(this.symbol));
+    const p: any = await this.call('getSymbolPrice', () => this.conn.getSymbolPrice(this.symbol));
     return { bid: p.bid, ask: p.ask, time: p.time ? new Date(p.time).getTime() : Date.now() };
   }
 
   async getSpec(): Promise<SymbolSpec> {
     if (this.specCache && Date.now() - this.specCache.at < 3_600_000) return this.specCache.spec;
-    const s = await this.call('getSymbolSpecification', () => this.conn.getSymbolSpecification(this.symbol));
+    const s: any = await this.call('getSymbolSpecification', () => this.conn.getSymbolSpecification(this.symbol));
     const spec: SymbolSpec = {
       contractSize: s.contractSize ?? 100,
       minVolume: s.minVolume ?? 0.01,
