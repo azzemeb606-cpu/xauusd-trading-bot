@@ -14,24 +14,16 @@ RUN npm install
 COPY backend/ ./
 RUN npm run build
 
-# ─── Stage 3: Runtime image ───────────────────────────────────────────────────
-FROM node:20-slim AS runtime
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl python3 make g++ \
-    && rm -rf /var/lib/apt/lists/*
+# ─── Stage 3: Production Runtime with Pre-installed Chromium ─────────────────
+FROM mcr.microsoft.com/playwright:v1.48.2-noble AS runtime
 
 WORKDIR /app/backend
 
-# Copy backend dependencies and install production modules
+# Copy package and install production dependencies
 COPY backend/package.json ./
 RUN npm install --omit=dev
 
-# Install Playwright Chromium browser binary and system dependencies
-ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
-RUN npx playwright install --with-deps chromium
-
-# Copy build artifacts
+# Copy compiled backend and frontend from builders
 COPY --from=server-builder /app/backend/dist ./dist
 COPY --from=web-builder    /app/frontend/dist /app/frontend/dist
 
