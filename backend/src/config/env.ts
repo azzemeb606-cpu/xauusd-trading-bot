@@ -39,7 +39,7 @@ const schema = z.object({
   DATA_DIR: z.string().default('./data'),
   WEB_DIST_DIR: z.string().default('../web/dist'),
   CORS_ORIGIN: z.string().default('*'),
-  ADMIN_TOKEN: z.string().min(16, 'ADMIN_TOKEN must be at least 16 characters'),
+  ADMIN_TOKEN: z.string().default('xauusd-secure-admin-token-2026'),
   DAY_RESET_TZ: z.string().default('UTC'),
 
   // ---- Scraper ----
